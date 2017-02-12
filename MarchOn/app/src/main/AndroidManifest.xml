@@ -79,7 +79,12 @@
 
         <activity
             android:name=".participant.NotificationsListActivity"
-            android:parentActivityName=".participant.MarchViewActivity"></activity>
+            android:parentActivityName=".participant.MarchViewActivity" />
+
+        <service
+            android:name=".NotificationPollerService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

@@ -82,7 +82,7 @@ public class OrganizerNotificationList extends AppCompatActivity {
             boolean good = true;
             try {
                 ApiInterface api = new ApiInterface(getString(R.string.api_server));
-                api.createNotification(notification);
+                api.createNotification(marchId, notification);
             } catch (ApiErrorException ex) {
                 Toast.makeText(this, "Unable to create notification", Toast.LENGTH_LONG).show();
                 good = false;

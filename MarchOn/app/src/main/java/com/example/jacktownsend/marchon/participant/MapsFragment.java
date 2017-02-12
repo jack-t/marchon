@@ -41,6 +41,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     March march;
     List<Route> routes;
+    List<Event> events;
 
     @Nullable
     @Override
@@ -51,14 +52,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         map = ((SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map));
 
+
         march = (March) getArguments().getSerializable("march");
         routes = (List<Route>) getArguments().getSerializable("routes");
-
+        events = (List<Event>) getArguments().getSerializable("events");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         if (!PreferencesManager.get().isSNM()) {
             map.getMapAsync(this);
             map.onResume();
         } else {
+            this.getChildFragmentManager().beginTransaction().remove(map).commit();
             Toast.makeText(inflater.getContext(), "Map view has been disabled for light data mode", Toast.LENGTH_LONG).show();
         }
         return layout;
@@ -70,9 +73,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             ApiInterface api = new ApiInterface(context.getString(R.string.api_server));
             March march = api.getMarch(march_id);
             ArrayList<Route> routes = api.getRoutes(march_id);
+            ArrayList<Event> events = api.getEventsList(march_id);
             Bundle bundle = new Bundle();
             bundle.putSerializable("march", march);
             bundle.putSerializable("routes", routes);
+            bundle.putSerializable("events", events);
             frag.setArguments(bundle);
         } catch (ApiErrorException ex) {
             ex.toast(context);
@@ -86,7 +91,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        for (Event e : march.events) {
+        for (Event e : events) {
             LatLng marchLoc = new LatLng(e.llat, e.llong);
             mMap.addMarker(new MarkerOptions().position(marchLoc).title(e.title));
         }

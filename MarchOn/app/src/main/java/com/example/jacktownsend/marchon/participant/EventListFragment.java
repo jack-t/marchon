@@ -67,8 +67,8 @@ public class EventListFragment extends Fragment {
         }
 
         title.setText(march.title);
-        location.setText("NOT DONE");
-        date.setText("NOT DONE");
+        location.setText(march.location);
+        date.setText(march.date);
         details.setText(march.description);
 
         // Set the adapter

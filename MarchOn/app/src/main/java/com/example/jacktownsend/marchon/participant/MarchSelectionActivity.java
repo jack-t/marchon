@@ -45,7 +45,7 @@ public class MarchSelectionActivity extends AppCompatActivity {
                 March march = (March) adapter.getItem(position);
                 PreferencesManager.get().setMarchId(march.id);
                 Intent intent = new Intent(MarchSelectionActivity.this, MarchViewActivity.class);
-                intent.putExtra("march", march);
+                intent.putExtra("march_id", march.id);
                 startActivity(intent);
             }
         });
@@ -58,11 +58,11 @@ public class MarchSelectionActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.snmMenuItem) {
             PreferencesManager.get().toggleSNM();
-        }
+        } else if (item.getItemId() == android.R.id.home) super.onBackPressed();
 
         return super.onContextItemSelected(item);
     }
@@ -71,14 +71,5 @@ public class MarchSelectionActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         adapter.populate();
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == android.R.id.home) super.onBackPressed();
-
-        return super.onOptionsItemSelected(item);
     }
 }

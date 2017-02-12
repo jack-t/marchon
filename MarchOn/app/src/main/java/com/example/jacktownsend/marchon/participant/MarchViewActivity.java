@@ -1,7 +1,12 @@
 package com.example.jacktownsend.marchon.participant;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -16,7 +21,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.jacktownsend.marchon.NotificationPollerService;
 import com.example.jacktownsend.marchon.R;
+import com.example.jacktownsend.marchon.api.Notification;
 import com.google.android.gms.maps.MapFragment;
 
 public class MarchViewActivity extends AppCompatActivity {
@@ -60,6 +67,11 @@ public class MarchViewActivity extends AppCompatActivity {
 
         march_id = getIntent().getIntExtra("march_id", -1);
 
+
+        Intent intent = new Intent(this, NotificationPollerService.class);
+        intent.putExtra("api", getString(R.string.api_server));
+        intent.putExtra("march_id", march_id);
+        startService(intent);
     }
 
     @Override

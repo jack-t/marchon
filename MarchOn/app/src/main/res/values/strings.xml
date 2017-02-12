@@ -4,7 +4,7 @@
 
 
     <string name="api_server">
-        IP_ADDRESS_HERE
+        http://54.187.139.80:8080
     </string>
     <string name="title_activity_organizer_notification_list">OrganizerNotificationList</string>
     <string name="title_activity_maps_dummy">Map</string>

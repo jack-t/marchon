@@ -52,7 +52,7 @@ public class PreferencesManager {
     }
 
     public void toggleSNM() {
-        this.prefs.edit().putBoolean("snm", prefs.contains("snm") ? prefs.getBoolean("snm", true) : true).commit();
+        this.prefs.edit().putBoolean("snm", prefs.contains("snm") ? !prefs.getBoolean("snm", true) : true).commit();
         Log.d("SNM", "Toggled SNM; now: " + prefs.getBoolean("snm", true));
     }
 

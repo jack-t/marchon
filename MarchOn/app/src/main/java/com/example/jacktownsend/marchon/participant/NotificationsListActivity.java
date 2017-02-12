@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.example.jacktownsend.marchon.NotificationPollerService;
 import com.example.jacktownsend.marchon.R;
 import com.example.jacktownsend.marchon.api.ApiErrorException;
 import com.example.jacktownsend.marchon.api.ApiInterface;
@@ -36,15 +37,16 @@ public class NotificationsListActivity extends AppCompatActivity {
         populate();
     }
 
+
+
+
+    @Override
+    public void onResume() {
+        populate();
+        super.onResume();
+    }
+
     public void populate() {
-
-        try {
-
-            ApiInterface api = new ApiInterface(getString(R.string.api_server));
-            adapter.setList(api.getNotifications(march_id));
-        } catch (ApiErrorException ex) {
-            ex.printStackTrace();
-            ex.toast(this);
-        }
+        adapter.setList(NotificationPollerService.currentList);
     }
 }
