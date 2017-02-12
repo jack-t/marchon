@@ -3,6 +3,7 @@ package com.example.jacktownsend.marchon.participant;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,6 +49,22 @@ public class MarchSelectionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.march_selection_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.snmMenuItem) {
+            PreferencesManager.get().toggleSNM();
+        }
+
+        return super.onContextItemSelected(item);
     }
 
     @Override

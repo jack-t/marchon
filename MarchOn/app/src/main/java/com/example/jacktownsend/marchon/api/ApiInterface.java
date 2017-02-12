@@ -32,11 +32,23 @@ public class ApiInterface {
     }
 
     public void createNotification(Notification notification) throws ApiErrorException {
+
     }
 
     public List<March> getMarchesList() throws ApiErrorException {
         return new ArrayList<March>() {{
-            add(new March(1, "Title", "Desc"));
+            add(new March(1, "Title", "Desc", new ArrayList<Event>(getEventsList(1)), 38.908292, -77.033489));
         }};
+    }
+
+    public List<Event> getEventsList(int marchId) throws ApiErrorException {
+        return new ArrayList<Event>() {{
+            add(new Event("Title", "Desc", 38.908292, -77.021489));
+            add(new Event("Title2", "Description", 38.915292, -77.021489));
+        }};
+    }
+
+    public March getMarch(int march_id) throws ApiErrorException {
+        return getMarchesList().get(0);
     }
 }

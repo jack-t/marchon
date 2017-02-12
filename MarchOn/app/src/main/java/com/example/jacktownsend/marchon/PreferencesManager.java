@@ -1,6 +1,7 @@
 package com.example.jacktownsend.marchon;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class PreferencesManager {
 
@@ -48,5 +49,14 @@ public class PreferencesManager {
 
     public int getMarchId() {
         return prefs.getInt("march", -1);
+    }
+
+    public void toggleSNM() {
+        this.prefs.edit().putBoolean("snm", prefs.contains("snm") ? prefs.getBoolean("snm", true) : true).commit();
+        Log.d("SNM", "Toggled SNM; now: " + prefs.getBoolean("snm", true));
+    }
+
+    public boolean isSNM() {
+        return prefs.getBoolean("snm", false);
     }
 }

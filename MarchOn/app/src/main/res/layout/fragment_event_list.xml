@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:id="@+id/infoLayout"
+        android:paddingBottom="20dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15dp">
+
+            <TextView
+                android:text="March Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:gravity="start" />
+
+            <TextView
+                android:text="The March's Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventListTitleView"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:gravity="end" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="March Location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:gravity="start" />
+
+            <TextView
+                android:text="The March's Location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventListLocationView"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:gravity="end" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="March Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:gravity="start"
+                android:layout_marginBottom="15dp" />
+
+            <TextView
+                android:text="Tuesday March 7th"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventListDateView"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:gravity="end" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="March Details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:gravity="start"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:text="These are some details. They go on and on and on, and they almost never stop. Except when they do; that's when they stop. That may seem self-referential, but trust me--it's not."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventListDetailsView"
+                android:layout_weight="1"
+                android:textSize="18sp" />
+
+            <TextView
+                android:text="Schedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Events"
+                android:layout_weight="0.5"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:paddingTop="20dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/list"
+        android:name="com.example.jacktownsend.marchon.participant.EventListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="com.example.jacktownsend.marchon.participant.EventListFragment"
+        tools:listitem="@layout/fragment_event"
+        android:layout_below="@+id/infoLayout"
+        android:fadeScrollbars="false"
+        android:isScrollContainer="true" />
+</RelativeLayout>
