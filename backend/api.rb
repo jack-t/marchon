@@ -42,3 +42,8 @@ get '/routes/:march' do
     @march = March.first(:id => params[:march])
     @march.routes.to_json
 end
+
+get '/notifications/:march' do
+    @march = March.first(:id => params[:march])
+    @march.notifications.to_json
+end
