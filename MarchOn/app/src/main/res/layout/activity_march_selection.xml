@@ -10,21 +10,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.jacktownsend.marchon.participant.MarchSelectionActivity">
 
-    <TextView
-        android:text="Upcoming Marches"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView11"
-        android:textSize="30sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textStyle="normal|bold" />
-
     <ListView
+        android:id="@+id/marches"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/textView11"
-        android:layout_marginTop="20dp"
-        android:id="@+id/marches" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Upcoming Marches"
+        android:textSize="30sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:text="No Marches Yet"
+        android:textSize="24sp" />
+
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.jacktownsend.marchon.organizer.OrganizerTypeActivity;
+import com.example.jacktownsend.marchon.participant.MarchSelectionActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +42,7 @@ public class UserTypeActivity extends AppCompatActivity {
                 break;
             case "participant":
                 // participant march selection
-
+                clazz = MarchSelectionActivity.class;
                 break;
         }
         Intent intent = new Intent(this, clazz);

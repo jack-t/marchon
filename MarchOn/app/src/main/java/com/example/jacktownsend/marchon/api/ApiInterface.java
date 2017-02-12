@@ -1,6 +1,7 @@
 package com.example.jacktownsend.marchon.api;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ApiInterface {
@@ -13,7 +14,7 @@ public class ApiInterface {
 
     public Organizer authenticateOrganizer(String username, String password) throws ApiErrorException {
 
-        return new Organizer(1,1);
+        return new Organizer(1, 1);
 
     }
 
@@ -29,9 +30,14 @@ public class ApiInterface {
         return "NO MARCH NAME";
     }
 
-    public void createNotification(Notification notification)throws ApiErrorException {
+    public void createNotification(Notification notification) throws ApiErrorException {
 
 
+    }
 
+    public List<March> getMarchesList() throws ApiErrorException{
+        return new ArrayList<March>() {{
+          //  add(new March(1, "Title", "Desc"));
+        }};
     }
 }

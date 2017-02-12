@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 import com.example.jacktownsend.marchon.PreferencesManager;
 import com.example.jacktownsend.marchon.R;
+import com.example.jacktownsend.marchon.api.ApiErrorException;
+import com.example.jacktownsend.marchon.api.ApiInterface;
 import com.example.jacktownsend.marchon.api.March;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,8 +25,19 @@ public class MarchListAdapter extends BaseAdapter implements ListAdapter {
 
     public MarchListAdapter(AppCompatActivity app) {
         this.context = app;
+        marches = new ArrayList<>();
     }
 
+    public void populate() {
+        try {
+            ApiInterface api = new ApiInterface(context.getString(R.string.api_server));
+            marches.clear();
+            marches.addAll(api.getMarchesList());
+            this.notifyDataSetChanged();
+        } catch (ApiErrorException ex) {
+            ex.toast(context);
+        }
+    }
 
 
     @Override

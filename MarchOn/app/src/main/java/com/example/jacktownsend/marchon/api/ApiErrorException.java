@@ -1,5 +1,8 @@
 package com.example.jacktownsend.marchon.api;
 
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
+
 public class ApiErrorException extends Exception {
 
     private final int response;
@@ -16,5 +19,9 @@ public class ApiErrorException extends Exception {
     @Override
     public String getMessage() {
         return super.getMessage();
+    }
+
+    public void toast(AppCompatActivity act) {
+        Toast.makeText(act, "ApiError: " + response + " " + getMessage(), Toast.LENGTH_SHORT).show();
     }
 }
