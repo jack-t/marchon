@@ -19,8 +19,10 @@ public class OrganizerTypeActivity extends AppCompatActivity {
         Class<?> clazz = null;
         switch (view.getTag().toString()) {
             case "existing":
+                clazz = ExistingOrganizerSigninActivity.class;
                 break;
             case "new":
+                clazz = OrganizerSignupActivity.class;
                 break;
         }
         Intent intent = new Intent(this, clazz);

@@ -14,7 +14,6 @@ class March
 
     has n, :events
     has n, :notifications
-
 end
 
 class Event
@@ -44,12 +43,16 @@ class Organizer
     include BCrypt
     property :id, Serial
     property :username, String
-
 end
 
 DataMapper.finalize # finish up the models
 DataMapper.auto_upgrade!
 # Setup initial data
+
+user = Organizer.create(
+    :username => "username"
+)
+user.save!
 
 march = March.create(
     :title => "March Title",
@@ -59,10 +62,15 @@ march = March.create(
 )
 march.save!
 
-event = march.events.create(:title => "title", :description => "description")
-event.save!
-
 user = Organizer.create(
     :username => "username"
 )
 user.save!
+
+event = march.events.create(
+    :title => "title",
+    :description => "description"
+
+)
+event.save!
+

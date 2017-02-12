@@ -29,10 +29,11 @@
         android:textSize="36sp"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:onClick="onClick (UserTypeActivity)" />
+        android:onClick="proceed"
+        android:tag="participant" />
 
     <Button
-        android:text="Become An Organizer"
+        android:text="Become an Organizer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/organizerButton"
@@ -41,7 +42,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="onClick (UserTypeActivity)" />
+        android:onClick="proceed"
+        android:tag="organizer" />
 
     <TextView
         android:text="Are you an organizer or do you want to become one?"

@@ -3,6 +3,7 @@ package com.example.jacktownsend.marchon.organizer;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -28,11 +29,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.jacktownsend.marchon.R;
+import com.example.jacktownsend.marchon.api.ApiErrorException;
+import com.example.jacktownsend.marchon.api.ApiInterface;
 
 import butterknife.BindView;
 
@@ -44,9 +48,9 @@ public class ExistingOrganizerSigninActivity extends AppCompatActivity {
     @BindView(R.id.signinButton)
     Button signin;
     @BindView(R.id.emailText)
-    EditText username;
+    EditText usernameText;
     @BindView(R.id.passwordText)
-    EditText password;
+    EditText passwordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +59,22 @@ public class ExistingOrganizerSigninActivity extends AppCompatActivity {
     }
 
     public void OnSignin(View view) {
+        String serverIP = getString(R.string.api_server);
 
+        String username = usernameText.getText().toString();
+        String password = passwordText.getText().toString();
+        int id;
+        try {
+            ApiInterface api = new ApiInterface(serverIP);
+            id = api.authenticateOrganizer(username, password);
+        } catch (ApiErrorException ex) {
+            Toast.makeText(this, "Log-in Failed", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Intent intent = new Intent(this, OrganizerNotificationList.class);
+        intent.putExtra("organizer_id", id);
+        startActivity(intent);
 
     }
 

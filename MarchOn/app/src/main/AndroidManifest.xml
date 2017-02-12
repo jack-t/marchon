@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jacktownsend.marchon">
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
@@ -33,6 +30,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.jacktownsend.marchon.organizer.OrganizerTypeActivity" />
         </activity>
+        <activity
+            android:name=".organizer.OrganizerSignupActivity"
+            android:parentActivityName=".organizer.OrganizerTypeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.jacktownsend.marchon.organizer.OrganizerTypeActivity" />
+        </activity>
+        <activity
+            android:name=".organizer.OrganizerNotificationList"
+            android:label="@string/title_activity_organizer_notification_list"
+            android:parentActivityName=".organizer.ExistingOrganizerSigninActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.jacktownsend.marchon.organizer.ExistingOrganizerSigninActivity" />
+        </activity>
+        <activity android:name=".organizer.CreateNotificationActivity"></activity>
     </application>
 
 </manifest>

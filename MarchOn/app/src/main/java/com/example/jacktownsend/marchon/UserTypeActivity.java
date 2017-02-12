@@ -15,7 +15,7 @@ public class UserTypeActivity extends AppCompatActivity {
 
     @BindView(R.id.participantButton)
     Button participantButton;
-    @BindView(R.id.participantButton)
+    @BindView(R.id.organizerButton)
     Button organizerButton;
 
     @Override
@@ -25,7 +25,7 @@ public class UserTypeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    public void onClick(View view) {
+    public void proceed(View view) {
         Class<?> clazz = null;
         switch (view.getTag().toString()) {
             case "organizer":
