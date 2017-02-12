@@ -79,6 +79,7 @@ public class MarchViewActivity extends AppCompatActivity {
 
         if (id == R.id.notifications) {
             Intent intent = new Intent(this, NotificationsListActivity.class);
+            intent.putExtra("march_id", march_id);
             startActivity(intent);
         }
 

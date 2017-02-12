@@ -37,11 +37,12 @@ public class ApiInterface {
 
     public List<March> getMarchesList() throws ApiErrorException {
         return new ArrayList<March>() {{
-            add(new March(1, "Title", "Desc", new ArrayList<Event>(getEventsList(1)), 38.908292, -77.033489));
+            //1, "Title", "Desc", "Washington, DC", 1,new ArrayList<Event>(getEventsList(1)), 38.908292, -77.033489
+            add(new March("title", "desc", "date", "location", 1, 38.908292, -77.033489, getEventsList(1)));
         }};
     }
 
-    public List<Event> getEventsList(int marchId) throws ApiErrorException {
+    public ArrayList<Event> getEventsList(int marchId) throws ApiErrorException {
         return new ArrayList<Event>() {{
             add(new Event("Title", "Desc", 38.908292, -77.021489));
             add(new Event("Title2", "Description", 38.915292, -77.021489));
@@ -56,6 +57,10 @@ public class ApiInterface {
         return new ArrayList<Route>() {{
             add(new Route(38.908292, -77.021489, 38.915292, -77.021489));
         }};
+    }
+
+    public List<Notification> getNotifications(int march_id)throws ApiErrorException {
+        return null;
     }
 }
 

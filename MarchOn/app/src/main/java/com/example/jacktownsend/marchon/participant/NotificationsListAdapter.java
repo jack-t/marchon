@@ -12,9 +12,6 @@ import com.example.jacktownsend.marchon.api.Notification;
 
 import java.util.List;
 
-/**
- * Created by Jack Townsend on 2/12/2017.
- */
 
 public class NotificationsListAdapter extends BaseAdapter {
 
@@ -24,6 +21,12 @@ public class NotificationsListAdapter extends BaseAdapter {
     public NotificationsListAdapter(Context context, List<Notification> notif) {
         this.notifications = notif;
         this.context = context;
+    }
+
+    public void setList(List<Notification> n) {
+        notifications.clear();
+        notifications.addAll(n);
+        this.notifyDataSetChanged();
     }
 
 
