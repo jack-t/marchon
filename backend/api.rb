@@ -37,3 +37,8 @@ post '/post_notification' do
     @notification.save!
      
 end
+
+get '/routes/:march' do
+    @march = March.first(:id => params[:march])
+    @march.routes.to_json
+end

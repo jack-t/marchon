@@ -51,4 +51,21 @@ public class ApiInterface {
     public March getMarch(int march_id) throws ApiErrorException {
         return getMarchesList().get(0);
     }
+
+    public ArrayList<Route> getRoutes(int march_id) {
+        return new ArrayList<Route>() {{
+            add(new Route(38.908292, -77.021489, 38.915292, -77.021489));
+        }};
+    }
 }
+
+
+
+
+
+
+
+
+
+
+

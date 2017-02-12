@@ -14,6 +14,18 @@ class March
 
     has n, :events
     has n, :notifications
+    has n, :routes
+end
+
+class Route
+    include DataMapper::Resource
+    property :id, Serial
+    property :llat_begin, Decimal
+    property :llong_begin, Decimal
+    property :llat_end, Decimal
+    property :llong_end, Decimal
+
+    belongs_to :march
 end
 
 class Event
@@ -74,3 +86,11 @@ event = march.events.create(
 )
 event.save!
 
+route = march.routes.create(
+    :llat_begin => 38.908292,
+    :llong_begin => -77.021489,
+    :llat_end => 38.915292,
+    :llong_end => -77.021489
+)
+
+route.save!

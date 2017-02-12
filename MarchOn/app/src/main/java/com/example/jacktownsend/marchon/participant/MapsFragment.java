@@ -17,6 +17,7 @@ import com.example.jacktownsend.marchon.api.ApiErrorException;
 import com.example.jacktownsend.marchon.api.ApiInterface;
 import com.example.jacktownsend.marchon.api.Event;
 import com.example.jacktownsend.marchon.api.March;
+import com.example.jacktownsend.marchon.api.Route;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -27,6 +28,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.example.jacktownsend.marchon.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -36,6 +40,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     SupportMapFragment map;
 
     March march;
+    List<Route> routes;
 
     @Nullable
     @Override
@@ -47,13 +52,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         map = ((SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map));
 
         march = (March) getArguments().getSerializable("march");
+        routes = (List<Route>) getArguments().getSerializable("routes");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         if (!PreferencesManager.get().isSNM()) {
             map.getMapAsync(this);
             map.onResume();
         } else {
-            Toast.makeText(inflater.getContext(), "Map view has been diabled for slow-network mode", Toast.LENGTH_LONG).show();
+            Toast.makeText(inflater.getContext(), "Map view has been disabled for light data mode", Toast.LENGTH_LONG).show();
         }
         return layout;
     }
@@ -61,11 +67,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public static MapsFragment newInstance(Context context, int march_id) {
         MapsFragment frag = new MapsFragment();
         try {
-
             ApiInterface api = new ApiInterface(context.getString(R.string.api_server));
             March march = api.getMarch(march_id);
+            ArrayList<Route> routes = api.getRoutes(march_id);
             Bundle bundle = new Bundle();
             bundle.putSerializable("march", march);
+            bundle.putSerializable("routes", routes);
             frag.setArguments(bundle);
         } catch (ApiErrorException ex) {
             ex.toast(context);
@@ -86,6 +93,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         LatLng center = new LatLng(march.llat, march.llong);
         mMap.addMarker(new MarkerOptions().position(center).title(march.title));
+
+        for (Route route : routes) {
+            mMap.addPolyline(route.makePoly(this.getContext()));
+        }
+
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(center));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(15.5f));
