@@ -7,5 +7,5 @@
         IP_ADDRESS_HERE
     </string>
     <string name="title_activity_organizer_notification_list">OrganizerNotificationList</string>
-    <string name="action_settings">Settings</string>
+    <string name="title_activity_maps_dummy">Map</string>
 </resources>

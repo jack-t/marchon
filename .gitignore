@@ -105,5 +105,5 @@ freeline/
 freeline_project_description.json
 
 # Custom Android Ignores
-
+*google_maps*
 *gradle-wrapper*

@@ -43,15 +43,16 @@ public class MarchSelectionActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 March march = (March) adapter.getItem(position);
                 PreferencesManager.get().setMarchId(march.id);
-//                Intent intent = new Intent(MarchSelectionActivity.class, MarchViewScreen.class);
-//                intent.putExtra("march", march);
-//                startActivity(intent);
+                Intent intent = new Intent(MarchSelectionActivity.this, MarchViewActivity.class);
+                intent.putExtra("march", march);
+                startActivity(intent);
             }
         });
     }
 
     @Override
     public void onResume() {
+        super.onResume();
         adapter.populate();
     }
 

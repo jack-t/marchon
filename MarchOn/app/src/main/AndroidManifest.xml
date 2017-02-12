@@ -4,6 +4,13 @@
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -48,7 +55,31 @@
                 android:value="com.example.jacktownsend.marchon.organizer.ExistingOrganizerSigninActivity" />
         </activity>
         <activity android:name=".organizer.CreateNotificationActivity" />
-        <activity android:name=".participant.MarchSelectionActivity"></activity>
+        <activity android:name=".participant.MarchSelectionActivity" />
+        <activity
+            android:name=".participant.MarchViewActivity"
+            android:label="March On"
+            android:parentActivityName=".participant.MarchSelectionActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.jacktownsend.marchon.participant.MarchSelectionActivity" />
+        </activity>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".participant.MapsDummyActivity"
+            android:label="@string/title_activity_maps_dummy"></activity>
     </application>
 
 </manifest>

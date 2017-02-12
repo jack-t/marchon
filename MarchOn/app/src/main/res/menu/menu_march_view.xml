@@ -1,10 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.jacktownsend.marchon.organizer.OrganizerNotificationList">
+    tools:context="com.example.jacktownsend.marchon.participant.MarchViewActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/notifications"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        app:showAsAction="always"
+        android:icon="@android:drawable/ic_lock_idle_alarm" />
 </menu>
