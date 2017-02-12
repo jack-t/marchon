@@ -10,7 +10,8 @@ class March
     property :title, String
     property :lat, Decimal 
     property :long, Decimal 
-    property :date, Date 
+    property :date, String 
+    property :location, String
 
     has n, :events
     has n, :notifications
@@ -94,3 +95,16 @@ route = march.routes.create(
 )
 
 route.save!
+
+notif = march.notifications.create(
+	:title => "This is a title",
+	:description => "Description"
+)
+notif.save!
+
+
+notif2 = march.notifications.create(
+	:title => "This is a title2",
+	:description => "Description"
+)
+notif2.save!
