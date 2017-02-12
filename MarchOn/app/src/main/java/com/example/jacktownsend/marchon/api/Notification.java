@@ -1,4 +1,4 @@
-package com.example.jacktownsend.marchon;
+package com.example.jacktownsend.marchon.api;
 
 public class Notification {
 

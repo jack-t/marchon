@@ -1,9 +1,5 @@
-package com.example.jacktownsend.marchon;
+package com.example.jacktownsend.marchon.organizer;
 
-import android.app.Activity;
-import android.content.Context;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +7,21 @@ import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.jacktownsend.marchon.R;
+import com.example.jacktownsend.marchon.api.Notification;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class NotificationListAdapter extends BaseAdapter implements ListAdapter {
 
-    private Fragment context;
+    private AppCompatActivity context;
 
-    public NotificationListAdapter(Fragment activity) {
+    public NotificationListAdapter(AppCompatActivity activity) {
         super();
         this.context = activity;
+        notifications = new ArrayList<>();
     }
 
     private List<Notification> notifications;
@@ -30,10 +29,12 @@ public class NotificationListAdapter extends BaseAdapter implements ListAdapter 
     public void setList(Collection<Notification> notifs) {
         notifications.clear();
         notifications.addAll(notifs);
+        this.notifyDataSetChanged();
     }
 
     public void addNotification(Notification notif) {
         notifications.add(notif);
+        this.notifyDataSetChanged();
     }
 
 
@@ -56,7 +57,7 @@ public class NotificationListAdapter extends BaseAdapter implements ListAdapter 
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            convertView = context.getActivity().getLayoutInflater().inflate(R.layout.notification_row, parent);
+            convertView = context.getLayoutInflater().inflate(R.layout.notification_row, null);
         }
 
         TextView titleText = (TextView) convertView.findViewById(R.id.rowTitleText);

@@ -23,6 +23,13 @@ public class UserTypeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_type);
         ButterKnife.bind(this);
+
+        PreferencesManager.set(getPreferences(MODE_PRIVATE));
+
+        if (PreferencesManager.get().isOrganizer()) {
+            proceed(organizerButton);
+        }
+
     }
 
     public void proceed(View view) {
@@ -34,6 +41,7 @@ public class UserTypeActivity extends AppCompatActivity {
                 break;
             case "participant":
                 // participant march selection
+
                 break;
         }
         Intent intent = new Intent(this, clazz);

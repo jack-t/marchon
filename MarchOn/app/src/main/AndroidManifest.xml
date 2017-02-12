@@ -47,7 +47,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.jacktownsend.marchon.organizer.ExistingOrganizerSigninActivity" />
         </activity>
-        <activity android:name=".organizer.CreateNotificationActivity"></activity>
+        <activity android:name=".organizer.CreateNotificationActivity" />
+        <activity android:name=".participant.MarchSelectionActivity"></activity>
     </application>
 
 </manifest>

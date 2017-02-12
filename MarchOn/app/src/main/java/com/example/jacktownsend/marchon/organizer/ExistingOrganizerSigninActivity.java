@@ -1,46 +1,23 @@
 package com.example.jacktownsend.marchon.organizer;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.example.jacktownsend.marchon.api.Organizer;
+import com.example.jacktownsend.marchon.PreferencesManager;
 import com.example.jacktownsend.marchon.R;
 import com.example.jacktownsend.marchon.api.ApiErrorException;
 import com.example.jacktownsend.marchon.api.ApiInterface;
 
+import butterknife.BindString;
 import butterknife.BindView;
-
-import static android.Manifest.permission.READ_CONTACTS;
+import butterknife.ButterKnife;
 
 
 public class ExistingOrganizerSigninActivity extends AppCompatActivity {
@@ -56,26 +33,38 @@ public class ExistingOrganizerSigninActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_existing_organizer_signin);
+        ButterKnife.bind(this);
     }
 
-    public void OnSignin(View view) {
-        String serverIP = getString(R.string.api_server);
+    @BindString(R.string.api_server)
+    String serverIP;
+
+    public void onSignin(View view) {
 
         String username = usernameText.getText().toString();
         String password = passwordText.getText().toString();
-        int id;
+        int organizer_id;
+        int march_id;
+        String name = null;
         try {
             ApiInterface api = new ApiInterface(serverIP);
-            id = api.authenticateOrganizer(username, password);
+            Organizer organizer = api.authenticateOrganizer(username, password);
+            organizer_id = organizer.organizer;
+            march_id = organizer.march;
+            name = api.getMarchName(march_id);
         } catch (ApiErrorException ex) {
             Toast.makeText(this, "Log-in Failed", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Intent intent = new Intent(this, OrganizerNotificationList.class);
-        intent.putExtra("organizer_id", id);
-        startActivity(intent);
+        PreferencesManager.get().setOrganizerId(organizer_id);
+        PreferencesManager.get().setMarchId(march_id);
 
+        Intent intent = new Intent(this, OrganizerNotificationList.class);
+        intent.putExtra("organizer_id", organizer_id);
+        intent.putExtra("march_id", march_id);
+        intent.putExtra("march_name", name);
+        startActivity(intent);
     }
 
 

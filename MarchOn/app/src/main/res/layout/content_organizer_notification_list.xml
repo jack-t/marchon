@@ -9,29 +9,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="80dp"
         android:text="Manage notifications for"
         android:textSize="24sp" />
 
     <TextView
-        android:text="March Name Here"
+        android:id="@+id/marchTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:id="@+id/marchTitleText"
-        android:textStyle="normal|bold"
-        android:textSize="24sp"
         android:layout_below="@+id/textView7"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
 
-    <FrameLayout
+    <ListView
+        android:id="@+id/notifListFrame"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/notifListFrame">
-
-    </FrameLayout>
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

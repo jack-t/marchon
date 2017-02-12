@@ -204,7 +204,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:text="Create your march"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:onClick="onSignup (OrganizerSignupActivity)" />
             </LinearLayout>
 
         </LinearLayout>
