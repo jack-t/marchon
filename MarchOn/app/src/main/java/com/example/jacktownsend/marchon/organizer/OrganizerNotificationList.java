@@ -77,7 +77,7 @@ public class OrganizerNotificationList extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             String title = data.getStringExtra("notification_title");
             String description = data.getStringExtra("notification_description");
-            final Notification notification = new Notification(title, description);
+            final Notification notification = new Notification(title, description, "date");
 
             boolean good = true;
             try {

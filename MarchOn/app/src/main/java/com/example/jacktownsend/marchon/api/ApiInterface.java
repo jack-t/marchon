@@ -1,29 +1,17 @@
 package com.example.jacktownsend.marchon.api;
 
-import android.app.DownloadManager;
 import android.content.Context;
-import android.os.AsyncTask;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ApiInterface {
@@ -34,21 +22,18 @@ public class ApiInterface {
         this.api = api;
     }
 
+    public static March march = new March("Women's March", "The Women's March on Washington, Jan 21 2017.", "Jan. 21, 2017", "Washington, D.C.", 1, 38.887635, -77.015280);
+    public static Event ev1 = new Event("Rally", "A program featuring nationally recognized advocates, artists, entertainers, entrepreneurs, thought leaders, and others will be announced in the coming days.", "9:30 AM", 38.887635, -77.015280);
+    public static Event ev2 = new Event("March Ends", "The Ellipse is where the march ends.", "3:30 PM", 38.893738, -77.036406);
+
+    public static Route route1 = new Route(38.887635, -77.015280, 38.887626, -77.031858);
+    public static Route route2 = new Route(38.887626, -77.031858, 38.892093, -77.031934);
+    public static Route route3 = new Route(38.892093, -77.031934, 38.892089, -77.036546);
+
+    public static Notification notification = new Notification("Plans Changed!", "Use Constitution, not Independence.", "2:30 PM");
+
     public Organizer authenticateOrganizer(String username, String password) throws ApiErrorException {
-        final Organizer or = new Organizer();
-        RequestFuture<JSONObject> future = RequestFuture.newFuture();
-
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, api + "/login/" + username, null, future, future);
-        queue.add(jsObjRequest);
-
-        try {
-            JSONObject response = future.get();
-            or.organizer = Integer.parseInt(response.get("organizer_id").toString());
-            or.march = Integer.parseInt(response.get("march_id").toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return or;
+        return new Organizer(1, 1);
     }
 
 
@@ -58,23 +43,9 @@ public class ApiInterface {
 
     public List<Notification> notificationsForMarch(int marchId) {
 
-        final ArrayList<Notification> ret = new ArrayList<>();
-        RequestFuture<JSONArray> future = RequestFuture.newFuture();
-
-        JsonArrayRequest jsObjRequest = new JsonArrayRequest(Request.Method.POST, api + "/notifications/" + marchId, null, future, future);
-        queue.add(jsObjRequest);
-
-        try {
-            JSONArray response = future.get();
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject obj = response.getJSONObject(i);
-                Notification notif = new Notification(obj.getString("title"), obj.getString("description"));
-                ret.add(notif);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ret;
+        return new ArrayList<Notification>() {{
+            add(notification);
+        }};
     }
 
     public String getMarchName(int marchId) throws ApiErrorException {
@@ -98,46 +69,20 @@ public class ApiInterface {
             }
         });
         queue.add(request);
+        //TODO
     }
 
     public List<March> getMarchesList() throws ApiErrorException {
-        final ArrayList<March> ret = new ArrayList<>();
-        RequestFuture<JSONArray> future = RequestFuture.newFuture();
-
-        JsonArrayRequest jsObjRequest = new JsonArrayRequest(Request.Method.GET, api + "/marches/", null, future, future);
-        //queue.add(jsObjRequest);
-        future.setRequest(jsObjRequest);
-        try {
-            JSONArray response = future.get();
-
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject obj = response.getJSONObject(i);
-                March march = new March(obj.getString("title"), obj.getString("description"), obj.getString("date"), obj.getString("location"), obj.getInt("id"), obj.getDouble("llat"), obj.getDouble("llong"));
-                ret.add(march);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ret;
+        return new ArrayList<March>() {{
+            add(march);
+        }};
     }
 
     public ArrayList<Event> getEventsList(int marchId) throws ApiErrorException {
-        final ArrayList<Event> ret = new ArrayList<>();
-        RequestFuture<JSONArray> future = RequestFuture.newFuture();
-
-        JsonArrayRequest jsObjRequest = new JsonArrayRequest(Request.Method.GET, api + "/events/" + marchId, null, future, future);
-        queue.add(jsObjRequest);
-        try {
-            JSONArray response = future.get();
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject obj = response.getJSONObject(i);
-                Event event = new Event(obj.getString("title"), obj.getString("description"), obj.getDouble("llat"), obj.getDouble("llong"));
-                ret.add(event);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ret;
+        return new ArrayList<Event>() {{
+            add(ev1);
+            add(ev2);
+        }};
     }
 
     public March getMarch(int march_id) throws ApiErrorException {
@@ -145,44 +90,18 @@ public class ApiInterface {
     }
 
     public ArrayList<Route> getRoutes(int march_id) {
-        final ArrayList<Route> ret = new ArrayList<>();
+        return new ArrayList<Route>() {{
+            add(route1);
+            add(route2);
+            add(route3);
 
-        RequestFuture<JSONArray> future = RequestFuture.newFuture();
-        JsonArrayRequest jsObjRequest = new JsonArrayRequest(Request.Method.GET, api + "/routes/" + march_id, null, future, future);
-        queue.add(jsObjRequest);
-        try {
-            JSONArray response = future.get();
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject obj = response.getJSONObject(i);
-                Route route = new Route(obj.getDouble("llat_begin"), obj.getDouble("llong_begin"), obj.getDouble("llat_end"), obj.getDouble("llong_end"));
-                ret.add(route);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ret;
+        }};
     }
 
     public List<Notification> getNotifications(int march_id) throws ApiErrorException {
-        final ArrayList<Notification> ret = new ArrayList<>();
-
-        RequestFuture<JSONArray> future = RequestFuture.newFuture();
-        JsonArrayRequest jsObjRequest = new JsonArrayRequest(Request.Method.GET, api + "/routes/" + march_id, null, future, future);
-        //future.setRequest(jsObjRequest);
-        queue.add(jsObjRequest);
-        try {
-            JSONArray response = future.get();
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject obj = response.getJSONObject(i);
-                Notification notif = new Notification(obj.getString("title"), obj.getString("description"));
-                ret.add(notif);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return ret;
+        return new ArrayList<Notification>() {{
+            add(notification);
+        }};
     }
 
     private static RequestQueue queue;
@@ -190,7 +109,6 @@ public class ApiInterface {
     public static void init(Context context) {
         queue = Volley.newRequestQueue(context);
     }
-
 }
 
 

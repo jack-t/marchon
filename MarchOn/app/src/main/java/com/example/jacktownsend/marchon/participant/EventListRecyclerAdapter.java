@@ -33,7 +33,7 @@ public class EventListRecyclerAdapter extends RecyclerView.Adapter<EventListRecy
         Event item = items.get(i);
 
         customViewHolder.titleText.setText(item.title);
-        customViewHolder.timeText.setText("10:10 AM");
+        customViewHolder.timeText.setText(item.date);
     }
 
     @Override
